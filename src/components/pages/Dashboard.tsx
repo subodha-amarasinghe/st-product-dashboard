@@ -34,6 +34,7 @@ const Dashboard: React.FC = () => {
 
   const handleSetSelectedProducts = useCallback(async (products: Product[], runReport:boolean) => {
     if(runReport) {
+      setMobileOpen(false)
       setLoading(true)
       setTimeout(() => {
         setLoading(false)
