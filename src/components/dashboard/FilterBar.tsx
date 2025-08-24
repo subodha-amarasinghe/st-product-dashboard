@@ -4,7 +4,7 @@ import { Category, Product } from "../../types/dashboard";
 import { Box, Button, MenuItem, Select, Toolbar, Typography, FormControl, InputLabel, Divider, Checkbox, OutlinedInput, SelectChangeEvent } from "@mui/material";
 
 const FilterWrapper = styled(Box)(({ theme }) => ({
-    padding: theme.spacing(2),
+    padding: theme.spacing(3),
     display: "flex",
     flexDirection: "column",
     justifyContent: "space-between",
