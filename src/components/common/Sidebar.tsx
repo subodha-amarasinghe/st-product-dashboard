@@ -32,7 +32,7 @@ const Sidebar: React.FC<SidebarProps> = ({ children, mobileOpen, onClose }) => {
                 ModalProps={{ keepMounted: true }}
                 slotProps={{
                     paper: {
-                        sx: { width: "90%" },
+                        sx: { width: "80%" },
                     }
                 }}
             >
