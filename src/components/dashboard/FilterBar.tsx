@@ -123,7 +123,7 @@ const FilterBar: React.FC<FilterBarProps> = ({
                 </FilterContainer>
 
                 <Box sx={{ display: "flex" }}>
-                    <Button variant="contained" color="primary" size="large" sx={{ width: "100%" }} onClick={handleRunReport} disabled={selectedProductIds.length<1}>
+                    <Button variant="contained" color="primary" size="large" sx={{ width: "100%" }} onClick={handleRunReport} disabled={selectedProductIds.length<1 || (selectedProducts.length===selectedProductIds.length)}>
                         Run Report
                     </Button>
                 </Box>
