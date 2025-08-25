@@ -7,10 +7,11 @@ import FilterBar from "../dashboard/FilterBar";
 import { Category, Product } from "../../types/dashboard";
 import { fetchCategories, fetchProducts } from "../../api/dashboard";
 
-
 const Dashboard: React.FC = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState<Category | null>(null);
+  const [selectedCategory, setSelectedCategory] = useState<Category | null>(
+    null
+  );
   const [categories, setCategories] = useState<Category[]>([]);
   const [selectedProducts, setSelectedProducts] = useState<Product[]>([]);
   const [products, setProducts] = useState<Product[]>([]);
@@ -30,31 +31,40 @@ const Dashboard: React.FC = () => {
     loadCategories();
   }, []);
 
-  const handleDrawerToggle = useCallback(() => setMobileOpen((prev) => !prev), []);
+  const handleDrawerToggle = useCallback(
+    () => setMobileOpen((prev) => !prev),
+    []
+  );
 
-  const handleSetSelectedProducts = useCallback(async (products: Product[], runReport:boolean) => {
-    if(runReport) {
-      setLoading(true)
-      setTimeout(() => {
-        setLoading(false)
-      }, 3000);
-      setSelectedProducts(products)
-    } else {
-      setSelectedProducts(products)
-    }
-    
-  }, [])
+  const handleSetSelectedProducts = useCallback(
+    async (products: Product[], runReport: boolean) => {
+      if (runReport) {
+        // Added this logic to add timeout only for the "Run Report" Button click
+        setMobileOpen(false);
+        setLoading(true);
+        setTimeout(() => {
+          setLoading(false);
+        }, 3000);
+        setSelectedProducts(products);
+      } else {
+        setSelectedProducts(products);
+      }
+    },
+    []
+  );
 
-  const handleCategoryChange = useCallback(async (category: Category | null) => {
-    setSelectedProducts([]);
-    setSelectedCategory(category);
-    if (category) {
-      const productList = await fetchProducts(category.slug);
-      setProducts(productList.products);
-      setSelectedProducts(productList.products)
-    }
-  }, []);
-
+  const handleCategoryChange = useCallback(
+    async (category: Category | null) => {
+      setSelectedProducts([]);
+      setSelectedCategory(category);
+      if (category) {
+        const productList = await fetchProducts(category.slug);
+        setProducts(productList.products);
+        setSelectedProducts(productList.products);
+      }
+    },
+    []
+  );
 
   const filterBarProps = useMemo(
     () => ({
@@ -65,8 +75,15 @@ const Dashboard: React.FC = () => {
       selectedProducts,
       onSelectSelectedProducts: handleSetSelectedProducts,
     }),
-    [categories, selectedCategory, products, selectedProducts, handleCategoryChange, handleSetSelectedProducts]
-  )
+    [
+      categories,
+      selectedCategory,
+      products,
+      selectedProducts,
+      handleCategoryChange,
+      handleSetSelectedProducts,
+    ]
+  );
 
   return (
     <Box sx={{ display: "flex" }}>
