@@ -34,8 +34,6 @@ const Dashboard: React.FC = () => {
 
   const handleSetSelectedProducts = useCallback(async (products: Product[], runReport:boolean) => {
     if(runReport) {
-      // Added this logic to add timeout only for the "Run Report" Button click
-       setMobileOpen(false)
       setLoading(true)
       setTimeout(() => {
         setLoading(false)
